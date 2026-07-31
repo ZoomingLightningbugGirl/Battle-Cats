@@ -1,14 +1,26 @@
 from random import *
 
-# Enemy has a 20% chance of gaining a buff
-# Enemy deals between 20 and 30 dmg
+class Enemy:
+    def __init__(self, hp):
+        self.hp = hp
+        self.baseatkpower = randint(20, 30)
+        self.buff = 0
+        self.atk = self.baseatkpower + self.buff
+    def receiveHit(self, dmg):
+        self.hp
+        self.buff = 0
+
+    def giveHit(self):
+        if randint(0, 10) <= 1:
+            self.buff = 10
+        self.atk += self.buff
 
 def receiveHit(atk):
     hp -= atk
 
-hp = 100
-buff = 0
-baseAtk = randint(20, 30)
-Atk = baseAtk + buff
-if randint(0, 10) <= 1:
-    buff = 10
+raccoon = Enemy(100)
+mouse = Enemy(10)
+rat = Enemy(20)
+fox = Enemy(120)
+sparrow = Enemy(50)
+hawk = Enemy(80)
