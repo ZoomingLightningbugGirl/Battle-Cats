@@ -1,4 +1,7 @@
 import pygame
+import sophiaisles
+import enemy
+import cards
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
