@@ -12,13 +12,12 @@ image = pygame.transform.scale(image, (100, 100))
 
 running = True
 while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
     screen.fill((255, 255, 255))
     screen.blit(image, (680, 480))
     pygame.display.flip()
     if keyboard.read_key() == "space":
-        screen.blit(image, (0, 0))
-        print("meow", end = "")
+        screen.blit(image, (random.randint(0, 700), random.randint(0, 500)))
+        print("meow")
+    if keyboard.read_key() == "q":
+        running = False
 pygame.quit()

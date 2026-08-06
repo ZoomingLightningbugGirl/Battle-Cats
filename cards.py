@@ -1,8 +1,34 @@
-from random import *
+class Cards:
+    def __init__(self, mana, buff, debuff):
+        self.mana = mana
+        self.buff = buff
+        self.debuff = debuff
 
-hp = 100
-atk = randint(25, 30)
-buff = 0
+    def spending(self, current):
+        current -= self.mana
+        return current
 
-gingerCard = 10 # buff card
-calicoCard = 30 # atk card
+class Debuff(Cards):
+    def __init__(self, mana, buff, debuff):
+        super().__init__(mana, buff, debuff)
+
+    def apply(self):
+        self.buff += 10
+        return self.buff
+
+class Buff(Cards):
+    def __init__(self, mana, buff=0, debuff=0):
+        super().__init__(mana, buff, debuff)
+
+    def apply(self):
+        self.buff += 10
+        return self.buff
+
+
+
+
+
+
+
+
+    
