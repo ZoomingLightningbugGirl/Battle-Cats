@@ -1,6 +1,10 @@
 from cards import Cards, Buff, Debuff
 from newenemy import Enemy
 import random
+import pygame
+import keyboard
+import random
+
 class Player:
     def __init__(self, damage,mana):
         self.damage = damage
@@ -35,16 +39,19 @@ class Player:
         else:
             print("Not enough mana!")
             return 0
-        def generate_card(self):
-            card_type = random.choice([Buff, Debuff])
-            mana_cost = random.randint(3, 8)
+            
+    def generate_card(self, image):
+        screen.blit(image, (random.randint(0, 700), random.randint(0, 500)))
+        card_type = random.choice([Buff, Debuff])
+        mana_cost = random.randint(3, 8)
+    
+        if card_type == Buff:
+            starting_Buff = 10
+            return Buff(mana=mana_cost,buff= starting_buff,debuff = 0)
+        else:
+            starting_debuff = 10
+        return Debuff(mana=mana_cost, buff=0, debuff=starting_debuff)
         
-            if card_type == Buff:
-                starting_Buff = 10
-                return Buff(mana=mana_cost,buff= starting_buff,debuff = 0)
-            else:
-                starting_debuff = 10
-            return Debuff(mana=mana_cost, buff=0, debuff=starting_debuff)
     def start_turn(self):
       
         self.mana += 10
@@ -55,4 +62,28 @@ class Player:
             self.choices.append(random_card)
 
 
-    
+
+
+
+
+
+
+pygame.init()
+screen_width, screen_height = 800, 600
+screen = pygame.display.set_mode((screen_width, screen_height))
+pygame.display.set_caption("cat")
+
+image = pygame.image.load("cattt.jpg").convert_alpha() 
+image = pygame.transform.scale(image, (100, 100))
+
+running = True
+while running:
+    screen.fill((255, 255, 255))
+    screen.blit(image, (680, 480))
+    pygame.display.flip()
+    if keyboard.read_key() == "space":
+        print("meow")
+        Player.generate_card(image)
+    if keyboard.read_key() == "q":
+        running = False
+pygame.quit()
