@@ -92,6 +92,7 @@ running = True
 
 while running:
     x = font.render(str(int(mana)), True, (0, 0, 0))
+    y = font.render(str(Player.health), True, (0, 0, 0))
     screen.fill((255, 255, 255))
     for cat in tophat_cats:
         screen.blit(tophat, cat)
@@ -100,6 +101,7 @@ while running:
     for cat in angy:
         screen.blit(angy, cat)
     screen.blit(x, (100, 100))
+    screen.blit(y, (0, 100))
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
