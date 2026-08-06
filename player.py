@@ -4,8 +4,7 @@ import random
 import pygame
 
 class Player:
-    def __init__(self, damage,mana):
-        self.damage = damage
+    def __init__(self,mana):
         self.health = 100
         self.mana = mana
         self.buff = 0
@@ -14,29 +13,17 @@ class Player:
         self.hand = []
         self.choices = []
 
-    def deal_damage(self, index,target_enemy):
-        if index < 0 or index >= len(self.choices):
-            return 0
-
-        card = self.choices[index]
-
-        if self.mana >= card.mana:
-            self.mana = card.spending(self.mana)
-            card.apply()
-            
-            if isinstance(card, Buff):
-                self.buff = card.buff  
-            elif isinstance(card, Debuff):
-                target_enemy.debuff = card.debuff 
-            
-            total_damage = self.damage + self.buff
-            target_enemy.receiveHit(total_damage)
-            self.start_turn()
-            
-            return total_damage
-        else:
-            print("Not enough mana!")
-            return 0
+    def deal_damage(self, damage, target_enemy):
+        self.mana = card.spending(self.mana)
+        card.apply()
+        if isinstance(card, Buff):
+            self.buff = card.buff  
+        elif isinstance(card, Debuff):
+            target_enemy.debuff = card.debuff 
+        total_damage = damage + self.buff
+        target_enemy.receiveHit(total_damage)
+        self.start_turn()
+        return total_damage
             
     def generate_card(self):
         card_type = random.choice([Buff, Debuff])
@@ -84,9 +71,12 @@ angy = pygame.transform.scale(image, (50, 50))
 
 font = pygame.font.Font(None, 50)
 
-tophat_cats = [(680, 480)] 
-rizz_kits = [(580, 480)]
-angy_cars = [480, 480)]
+def autism():
+    damage = 0
+    tophat_cats = [(680, 480)] 
+    rizz_kits = [(580, 480)]
+    angy_cars = [(480, 480)]
+autism()
 
 running = True
 
@@ -111,16 +101,22 @@ while running:
                 print("meow")
                 tophat.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
+                damage += 1
             if event.key == pygame.K_2:
                 print("meow")
                 rizz.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
+                damage += 1
             if event.key == pygame.K_1:
                 print("meow")
                 angy.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
+                damage += 1
             if event.key == pygame.K_q:
                 running = False
+            if event.key == pygame.K_SPACE:
+                Player.deal_damage(damage, target_enemy)
+                autism()
     clock.tick(60)
     player.mana += 1
     current_tick = pygame.time.get_ticks()
