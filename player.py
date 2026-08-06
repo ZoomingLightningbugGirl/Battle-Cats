@@ -2,7 +2,6 @@ from cards import Cards, Buff, Debuff
 from newenemy import Enemy
 import random
 import pygame
-import random
 
 class Player:
     def __init__(self, damage,mana):
