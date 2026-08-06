@@ -103,9 +103,17 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_3:
                 print("meow")
-                cats.append((random.randint(400, 700), random.randint(250, 350)))
+                tophat.append((random.randint(400, 700), random.randint(250, 350)))
+                player.generate_card()
+            if event.key == pygame.K_2:
+                print("meow")
+                rizz.append((random.randint(400, 700), random.randint(250, 350)))
+                player.generate_card()
+            if event.key == pygame.K_1:
+                print("meow")
+                angy.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
             if event.key == pygame.K_q:
                 running = False
