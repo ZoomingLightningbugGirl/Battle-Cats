@@ -68,22 +68,26 @@ class Player:
 
 
 
-
 pygame.init()
-screen_width, screen_height = 800, 600
+pygame.font.init()
+screen_width = 800
+screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("cat")
-
-image = pygame.image.load("cattt.jpg").convert_alpha() 
-image = pygame.transform.scale(image, (100, 100))
+pygame.display.set_caption("battle cats (plz dont sue me)")
+clock = pygame.time.Clock()
+image = pygame.image.load("Tophat.png").convert_alpha() 
+image = pygame.transform.scale(image, (50, 50))
+mana = 0.0
+font = pygame.font.Font(None, 50)
 
 cats = [(680, 480)]  
-
 running = True
 while running:
+    x = font.render(str(int(mana)), True, (0, 0, 0))
     screen.fill((255, 255, 255))
     for cat in cats:
         screen.blit(image, cat)
+    screen.blit(x, (100, 100))
     pygame.display.flip()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -91,8 +95,10 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 print("meow")
-                cats.append((random.randint(0, 700), random.randint(0, 500)))
-                generate_card()
+                cats.append((random.randint(400, 700), random.randint(250, 350)))
+                player.generate_card()
             if event.key == pygame.K_q:
                 running = False
+    clock.tick(60)
+    player.mana += 0.01
 pygame.quit()
