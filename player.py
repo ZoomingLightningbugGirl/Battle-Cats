@@ -101,17 +101,17 @@ while running:
                 print("meow")
                 tophat.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
-                damage += 1
+                damage += 20
             if event.key == pygame.K_2:
                 print("meow")
                 rizz.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
-                damage += 1
+                damage += 20
             if event.key == pygame.K_1:
                 print("meow")
                 angy.append((random.randint(400, 700), random.randint(250, 350)))
                 player.generate_card()
-                damage += 1
+                damage += 20
             if event.key == pygame.K_q:
                 running = False
             if event.key == pygame.K_SPACE:
