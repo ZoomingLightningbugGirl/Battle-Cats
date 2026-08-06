@@ -50,9 +50,6 @@ class Player:
         return Debuff(mana=mana_cost, buff=0, debuff=starting_debuff)
         
     def start_turn(self):
-      
-        self.mana += 10
-        
         self.choices = []
         for _ in range(3):
             random_card = self.generate_card()
@@ -76,6 +73,7 @@ screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("battle cats (plz dont sue me)")
 
 clock = pygame.time.Clock()
+last_tick = pygame.time.get_ticks()
 
 tophat = pygame.image.load("Tophat.png").convert_alpha() 
 tophat = pygame.transform.scale(image, (50, 50))
@@ -83,8 +81,6 @@ rizz = pygame.image.load("RizzKit.png").convert_alpha()
 rizz = pygame.transform.scale(image, (50, 50))
 angy = pygame.image.load("AngyCat.png").convert_alpha() 
 angy = pygame.transform.scale(image, (50, 50))
-
-mana = 0.0
 
 font = pygame.font.Font(None, 50)
 
@@ -124,5 +120,9 @@ while running:
             if event.key == pygame.K_q:
                 running = False
     clock.tick(60)
-    player.mana += 0.01
+    player.mana += 1
+    current_tick = pygame.time.get_ticks()
+    if current_tick - last_tick >= 10000:  # 1000 ms since last
+        player.start_turn
+        last_tick = current_tick
 pygame.quit()
