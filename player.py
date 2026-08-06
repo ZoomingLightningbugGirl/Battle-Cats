@@ -40,8 +40,7 @@ class Player:
             print("Not enough mana!")
             return 0
             
-    def generate_card(self, image):
-        screen.blit(image, (random.randint(0, 700), random.randint(0, 500)))
+    def generate_card(self):
         card_type = random.choice([Buff, Debuff])
         mana_cost = random.randint(3, 8)
     
@@ -68,6 +67,8 @@ class Player:
 
 
 
+
+
 pygame.init()
 screen_width, screen_height = 800, 600
 screen = pygame.display.set_mode((screen_width, screen_height))
@@ -76,14 +77,22 @@ pygame.display.set_caption("cat")
 image = pygame.image.load("cattt.jpg").convert_alpha() 
 image = pygame.transform.scale(image, (100, 100))
 
+cats = [(680, 480)]  
+
 running = True
 while running:
     screen.fill((255, 255, 255))
-    screen.blit(image, (680, 480))
+    for cat in cats:
+        screen.blit(image, cat)
     pygame.display.flip()
-    if keyboard.read_key() == "space":
-        print("meow")
-        Player.generate_card(image)
-    if keyboard.read_key() == "q":
-        running = False
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                print("meow")
+                cats.append((random.randint(0, 700), random.randint(0, 500)))
+                generate_card()
+            if event.key == pygame.K_q:
+                running = False
 pygame.quit()
