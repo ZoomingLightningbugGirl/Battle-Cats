@@ -181,7 +181,7 @@ while running:
         if ai_cooldown_timer == 0:
             ai_cooldown_timer = pygame.time.get_ticks()
         elif pygame.time.get_ticks() - ai_cooldown_timer > 1000:
-            damage_inflicted = target_enemy.giveHit(player)
+            damage_inflicted = target_enemy.giveHit()
             action_log = f"{enemy_name} hit youDealt {damage_inflicted} damage to you."
             player.mana = min(10, player.mana + 2)
             player_turn = True

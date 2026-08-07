@@ -29,7 +29,7 @@ class Enemy:
             
         return self.atk
 raccoon = Enemy(100)
-mouse = Enemy(10)
-rat = Enemy(20)
+mouse = Enemy(70)
+rat = Enemy(45)
 fox = Enemy(120)
 sparrow = Enemy(50)
