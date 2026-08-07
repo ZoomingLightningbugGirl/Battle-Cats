@@ -43,7 +43,8 @@ class Player:
 
 pygame.init()
 pygame.font.init()
-
+pygame.mixer.music.load("track.mp3")
+pygame.mixer.music.play(-1)
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
