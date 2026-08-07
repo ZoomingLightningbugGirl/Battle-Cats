@@ -1,4 +1,4 @@
-# Alex's slight remake It's not done but rn it's actually great and no i did not use AI for it just sometimes how pygame works
+# Alex's slight remake It's not done but rn it's actually great and yes i did  use AI for it just sometimes how pygame works
 import random
 import pygame
 from cards import Buff, Debuff
@@ -48,7 +48,7 @@ pygame.mixer.music.play(-1)
 screen_width = 800
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("battle cats (plz dont sue me)")
+pygame.display.set_caption("Cat Shenanigans")
 clock = pygame.time.Clock()
 
 font = pygame.font.Font(None, 28)
@@ -85,7 +85,7 @@ background = load_sprite("bg.png", (200, 200, 200), (screen_width, screen_height
 
 debuff_card_img = load_sprite("Tophat.png", (142, 68, 173), (70, 90))
 buff_card_img = load_sprite("RizzKit.png", (39, 174, 96), (70, 90))
-attack_card_img = load_sprite("AngyCat.png", (192, 57, 43), (70, 90))
+attack_card_img = load_sprite("AngyCar.png", (192, 57, 43), (70, 90))
 
 # UI Custom Bar Asset Containers
 hpbar = load_sprite("hpbar.png", (46, 204, 11), (180, 30))
@@ -112,6 +112,7 @@ while running:
     # STAGE CANVAS
     screen.blit(background, (0, 0))
     current_enemy_hp = max(0, target_enemy.hp)
+    
     
     #RENDER ENEMY NAME OVERLAY
     name_txt = font.render(f"Fighting: {enemy_name}", True, (0, 0, 0))
@@ -177,17 +178,6 @@ while running:
 
     pygame.display.flip()
 
-    # OPPONENT AUTOMATED TURNS  LOOP
-    if not player_turn and not game_over:
-        if ai_cooldown_timer == 0:
-            ai_cooldown_timer = pygame.time.get_ticks()
-        elif pygame.time.get_ticks() - ai_cooldown_timer > 1000:
-            damage_inflicted = target_enemy.giveHit()
-            action_log = f"{enemy_name} hit youDealt {damage_inflicted} damage to you."
-            player.mana = min(10, player.mana + 2)
-            player_turn = True
-            ai_cooldown_timer = 0
-
     #  INTERACTION PLATFORM
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -243,6 +233,16 @@ while running:
                             action_log = f"You clicked Card #{idx+1} hit enemy for {total_dmg} DMG."
                             player_turn = False
 
+    if not player_turn and not game_over:
+        if ai_cooldown_timer == 0:
+            ai_cooldown_timer = pygame.time.get_ticks()
+        elif pygame.time.get_ticks() - ai_cooldown_timer > 1000:
+            damage_inflicted = target_enemy.giveHit()
+            action_log = f"{enemy_name} hit youDealt {damage_inflicted} damage to you."
+            player.mana = min(10, player.mana + 2)
+            player.health = player.health - damage_inflicted
+            player_turn = True
+            ai_cooldown_timer = 0
 
     clock.tick(60)
 
